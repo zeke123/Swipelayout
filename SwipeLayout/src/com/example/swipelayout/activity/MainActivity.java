@@ -13,21 +13,24 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity 
+{
 
 	List<String> nums;
 	MyAdapter adapter;
 	private ListView listview;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_view);
 		listview = (ListView) findViewById(R.id.listview);
 		InitData();
 	}
 
-	private void InitData() {
+	private void InitData() 
+	{
 		nums = new ArrayList<String>();
 		for (int i = 0; i < 20; i++) {
 			nums.add(i + "");
@@ -36,31 +39,33 @@ public class MainActivity extends Activity {
 		listview.setAdapter(adapter);
 	}
 
-	private class MyAdapter extends BaseAdapter {
-		
+	private class MyAdapter extends BaseAdapter
+	{	
 		@Override
-		public int getCount() {
+		public int getCount() 
+		{
 			return nums.size();
 		}
-
 		@Override
 		public Object getItem(int position) {
 			return nums.get(position);
 		}
-
 		@Override
 		public long getItemId(int position) {
 			return position;
 		}
-
 		@Override
-		public View getView(final int position, View convertView,ViewGroup parent) {
+		public View getView(final int position, View convertView,ViewGroup parent)
+		{
 			View view;
 			final ViewHolder holder;
-			if (convertView != null) {
+			if (convertView != null) 
+			{
 				view = convertView;
 				holder = (ViewHolder) view.getTag();
-			} else {
+			} 
+			else 
+			{
 				view = View.inflate(MainActivity.this, R.layout.swipelayout_item,null);
 				holder = new ViewHolder();				
 				holder.swipelayout = (SwipeLayout)view.findViewById(R.id.swipelayout);	
@@ -69,25 +74,24 @@ public class MainActivity extends Activity {
 				holder.tv_name = (TextView)view.findViewById(R.id.tv_name);			
 				view.setTag(holder);
 				SwipeLayout.addSwipeView(holder.swipelayout);
-			}
-			
-			
+			}					
 			holder.tv_name.setText(nums.get(position));
-			holder.ll_delete.setOnClickListener(new View.OnClickListener() {
+			holder.ll_delete.setOnClickListener(new View.OnClickListener()
+			{
 				@Override
-				public void onClick(View v) {
+				public void onClick(View v) 
+				{
 					nums.remove(position);
 					notifyDataSetChanged();
 					SwipeLayout.removeSwipeView(holder.swipelayout);
-
 				}
-			});
-		
+			});		
 			return view;
 		}
 	}
 
-	class ViewHolder {
+	class ViewHolder 
+	{
 		SwipeLayout swipelayout;
 		TextView tv_name;
 		LinearLayout ll_edit;
